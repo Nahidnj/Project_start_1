@@ -113,3 +113,5 @@ if user_input:
                 st.markdown(reply)
         except Exception as e:
             st.error(f"❌ Error: {e}")
+st.write("API KEY FOUND?" , os.getenv("OPENAI_API_KEY"))
+

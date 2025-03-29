@@ -115,6 +115,55 @@
 #             st.error(f"❌ Error: {e}")
 #st.write("API KEY FOUND?" , os.getenv("OPENAI_API_KEY"))
 
+# import streamlit as st
+# import requests
+# import os
+
+# API_KEY = os.getenv("OPENAI_API_KEY")
+# API_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+# HEADERS = {
+#     "Authorization": f"Bearer {API_KEY}",
+#     "Content-Type": "application/json"
+# }
+
+# # تاریخچه چت اولیه
+# if "messages" not in st.session_state:
+#     st.session_state.messages = [
+#         {"role": "system", "content": "You are a helpful teaching assistant. Do NOT give direct answers. Ask guiding questions."}
+#     ]
+
+# st.set_page_config(page_title="Teaching Assistant Bot", page_icon="🧠")
+# st.title("📘 Teaching Assistant Chatbot")
+
+# # نمایش تاریخچه
+# for msg in st.session_state.messages[1:]:
+#     with st.chat_message(msg["role"]):
+#         st.markdown(msg["content"])
+
+# # ورودی کاربر
+# user_input = st.chat_input("Ask your question here...")
+# if user_input:
+#     st.session_state.messages.append({"role": "user", "content": user_input})
+#     with st.chat_message("user"):
+#         st.markdown(user_input)
+
+#     with st.spinner("Thinking..."):
+#         payload = {
+#             "model": "openai/chatgpt-4o-latest",
+#             "messages": st.session_state.messages,
+#             "temperature": 0.7
+#         }
+
+#         try:
+#             response = requests.post(API_URL, headers=HEADERS, json=payload)
+#             response.raise_for_status()
+#             reply = response.json()["choices"][0]["message"]["content"]
+#             st.session_state.messages.append({"role": "assistant", "content": reply})
+#             with st.chat_message("assistant"):
+#                 st.markdown(reply)
+#         except Exception as e:
+#             st.error(f"❌ Error: {e}")
 import streamlit as st
 import requests
 import os
@@ -150,7 +199,7 @@ if user_input:
 
     with st.spinner("Thinking..."):
         payload = {
-            "model": "openai/chatgpt-4o-latest",
+            "model": "openai/chatgpt-4o-latest",  # ← می‌تونی با gpt-3.5 یا deepseek هم تست کنی
             "messages": st.session_state.messages,
             "temperature": 0.7
         }
@@ -158,10 +207,18 @@ if user_input:
         try:
             response = requests.post(API_URL, headers=HEADERS, json=payload)
             response.raise_for_status()
-            reply = response.json()["choices"][0]["message"]["content"]
-            st.session_state.messages.append({"role": "assistant", "content": reply})
-            with st.chat_message("assistant"):
-                st.markdown(reply)
+            result = response.json()
+
+            # بررسی اینکه choices وجود داره یا نه
+            if "choices" in result and len(result["choices"]) > 0:
+                reply = result["choices"][0]["message"]["content"]
+                st.session_state.messages.append({"role": "assistant", "content": reply})
+                with st.chat_message("assistant"):
+                    st.markdown(reply)
+            else:
+                st.error("❌ Model response is empty or invalid. Showing raw response:")
+                st.json(result)
+
         except Exception as e:
             st.error(f"❌ Error: {e}")
 

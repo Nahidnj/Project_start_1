@@ -102,7 +102,7 @@ if user_input:
     with st.spinner("Thinking..."):
         try:
             response = client.chat.completions.create(
-                model="openai/gpt-3.5-turbo",
+                model="deepseek-ai/deepseek-chat",
                 messages=st.session_state.messages,
                 temperature=0.7,
                 max_tokens=300
@@ -113,5 +113,5 @@ if user_input:
                 st.markdown(reply)
         except Exception as e:
             st.error(f"❌ Error: {e}")
-st.write("API KEY FOUND?" , os.getenv("OPENAI_API_KEY"))
+#st.write("API KEY FOUND?" , os.getenv("OPENAI_API_KEY"))
 

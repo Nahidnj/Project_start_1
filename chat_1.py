@@ -3,7 +3,7 @@
 
 
 # client = openai.OpenAI(
-#     api_key="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"  # ← کلیدت رو اینجا بذار
+#     api_key="sk-proj"  # ← کلیدت رو اینجا بذار
 # )
 
 # def teaching_assistant_bot(question):
@@ -31,7 +31,7 @@
 # import openai
 
 # client = openai.OpenAI(
-#     api_key="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",
+#     api_key="",
 #     base_url="https://openrouter.ai/api/v1"
 # )
 

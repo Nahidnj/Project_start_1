@@ -150,7 +150,7 @@ if user_input:
 
     with st.spinner("Thinking..."):
         payload = {
-            "model": "openai/gpt-3.5-turbo",
+            "model": "openai/chatgpt-4o-latest",
             "messages": st.session_state.messages,
             "temperature": 0.7
         }

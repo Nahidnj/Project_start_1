@@ -67,12 +67,14 @@
 
 import openai
 import streamlit as st
+import os
 
-# OpenRouter setup
+
 client = openai.OpenAI(
-    api_key="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",
+    api_key=os.getenv("OPENAI_API_KEY"),  
     base_url="https://openrouter.ai/api/v1"
 )
+
 
 # Initialize session state
 if "messages" not in st.session_state:

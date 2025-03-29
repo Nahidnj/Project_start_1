@@ -201,8 +201,8 @@ if user_input:
         payload = {
             "model": "openai/chatgpt-4o-latest",  # ← می‌تونی با gpt-3.5 یا deepseek هم تست کنی
             "messages": st.session_state.messages,
-            "temperature": 0.7
-            "max_tokens": 300
+            "temperature": 0.7,
+            "max_tokens": 500
 
         }
 

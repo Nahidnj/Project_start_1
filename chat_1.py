@@ -65,87 +65,34 @@
         # print("❌ Error:", e)
 ##################################
 
-# import openai
-# import streamlit as st
-# import os
-
-
-# client = openai.OpenAI(
-#     api_key=os.getenv("OPENAI_API_KEY"),  
-#     base_url="https://openrouter.ai/api/v1"
-# )
-
-
-# # Initialize session state
-# if "messages" not in st.session_state:
-#     st.session_state.messages = [
-#         {"role": "system", "content": "You are a helpful teaching assistant. Do NOT give direct answers to the qestion. Instead, ask one question in each step to make the student approach himselt to the answer."}
-#     ]
-
-# # UI
-# st.set_page_config(page_title="Teaching Assistant Bot", page_icon="🏫")
-# st.title("📘 Teaching Assistant Chatbot")
-# st.markdown("_Ask your questions and let the bot guide you step-by-step without giving direct answers._")
-
-# # Chat display
-# for msg in st.session_state.messages[1:]:
-#     with st.chat_message(msg["role"]):
-#         st.markdown(msg["content"])
-
-# # User input
-# user_input = st.chat_input("Ask a question...")
-# if user_input:
-#     st.session_state.messages.append({"role": "user", "content": user_input})
-#     with st.chat_message("user"):
-#         st.markdown(user_input)
-
-#     with st.spinner("Thinking..."):
-#         try:
-#             response = client.chat.completions.create(
-#                 model="deepseek-ai/deepseek-chat",
-#                 messages=st.session_state.messages,
-#                 temperature=0.7,
-#                 max_tokens=300
-#             )
-#             reply = response.choices[0].message.content
-#             st.session_state.messages.append({"role": "assistant", "content": reply})
-#             with st.chat_message("assistant"):
-#                 st.markdown(reply)
-#         except Exception as e:
-#             st.error(f"❌ Error: {e}")
-#st.write("API KEY FOUND?" , os.getenv("OPENAI_API_KEY"))
-
-
 import openai
 import streamlit as st
 import os
 
-# راه‌اندازی کلاینت OpenRouter با خواندن کلید از متغیر محیطی
+
 client = openai.OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY"),
+    api_key=os.getenv("OPENAI_API_KEY"),  
     base_url="https://openrouter.ai/api/v1"
 )
 
-# نمایش کلید برای تست (موقت، برای دیباگ)
-st.write("API KEY:", os.getenv("OPENAI_API_KEY"))
 
-# تاریخچه چت اولیه
+# Initialize session state
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "system", "content": "You are a helpful teaching assistant. Do NOT give direct answers to the question. Instead, ask one question in each step to make the student approach the answer by themselves."}
+        {"role": "system", "content": "You are a helpful teaching assistant. Do NOT give direct answers to the qestion. Instead, ask one question in each step to make the student approach himselt to the answer."}
     ]
 
-# رابط کاربری
+# UI
 st.set_page_config(page_title="Teaching Assistant Bot", page_icon="🏫")
 st.title("📘 Teaching Assistant Chatbot")
 st.markdown("_Ask your questions and let the bot guide you step-by-step without giving direct answers._")
 
-# نمایش تاریخچه چت
+# Chat display
 for msg in st.session_state.messages[1:]:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-# ورودی کاربر
+# User input
 user_input = st.chat_input("Ask a question...")
 if user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
@@ -155,7 +102,7 @@ if user_input:
     with st.spinner("Thinking..."):
         try:
             response = client.chat.completions.create(
-                model="openai/gpt-3.5-turbo",  # مدل امن و در دسترس برای همه
+                model="deepseek-ai/deepseek-chat",
                 messages=st.session_state.messages,
                 temperature=0.7,
                 max_tokens=300
@@ -166,4 +113,7 @@ if user_input:
                 st.markdown(reply)
         except Exception as e:
             st.error(f"❌ Error: {e}")
+#st.write("API KEY FOUND?" , os.getenv("OPENAI_API_KEY"))
+
+
 

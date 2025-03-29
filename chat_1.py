@@ -102,7 +102,7 @@ if user_input:
     with st.spinner("Thinking..."):
         try:
             response = client.chat.completions.create(
-                model="openai/chatgpt-4o-latest",
+                model="openai/gpt-3.5-turbo",
                 messages=st.session_state.messages,
                 temperature=0.7,
                 max_tokens=300

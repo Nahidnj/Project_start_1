@@ -179,7 +179,7 @@ HEADERS = {
 # تاریخچه چت اولیه
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "system", "content": "You are a helpful teaching assistant. Do NOT give direct answers. Ask guiding questions."}
+        {"role": "system", "content": "You are a helpful teaching assistant. Do NOT give direct answers to the qestion. Instead, ask one question in each step to make the primary school student approach himselt to the answer."}
     ]
 
 st.set_page_config(page_title="Teaching Assistant Bot", page_icon="🧠")

@@ -199,7 +199,7 @@ if user_input:
 
     with st.spinner("Thinking..."):
         payload = {
-            "model": "gpt-3.5-turbo",  # ← می‌تونی با gpt-3.5 یا deepseek هم تست کنی
+            "model": "openai/chatgpt-4o-latest",  # ← می‌تونی با gpt-3.5 یا deepseek هم تست کنی
             "messages": st.session_state.messages,
             "temperature": 0.7,
             "max_tokens": 500
